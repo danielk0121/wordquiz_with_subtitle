@@ -35,7 +35,6 @@ dependencies {
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testImplementation("org.mockito:mockito-inline")
 }
 
