@@ -75,13 +75,17 @@
 ---
 - 한글 영어 자막 싱크 이슈 참고 자료
 ```
-idx | startMs | koText | enText
-    1 |     7920 |  | TONY: A famous man once said, 
-    2 |     8927 | 한 유명인사가 말하길 |  => 1007 ms 차이
-    3 |     9440 |  | "We create our own demons." 
-    4 |    10343 | '우린 스스로의 악마를 만든다' |  => 903 ms 차이
-  278 |   354640 |  | Stamp date and time. 
-  279 |   355556 | 날짜랑 시간 기록하고 |  => 916 ms 차이
+# 샘플 한글, 영어 자막 데이터
+  startMs | koText | enText |
+-------------------------------------------
+     7920 |  | A famous man once said, |
+     8927 | 한 유명인사가 말하길 | | => 1007 ms 차이
+     
+     9440 |  | "We create our own demons." |
+    10343 | '우린 스스로의 악마를 만든다' | | => 903 ms 차이
+    
+   354640 |  | Stamp date and time. |
+   355556 | 날짜랑 시간 기록하고 | | => 916 ms 차이
 ```
 
 ---
