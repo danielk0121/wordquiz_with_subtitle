@@ -128,14 +128,4 @@ class FileReadTest {
         }.filter { it.second.isNotBlank() } // 내용이 없는 싱크(자막 종료용)는 제외
             .toList()
     }
-
-    private fun printFormatted(list: List<SubtitleDouble>) {
-        list
-            .take(300)
-            .forEachIndexed { index, item ->
-                val lineNumber = "%5d".format(index)
-                val formattedTime = "%8d".format(item.startTime)
-                println("$lineNumber | $formattedTime | ${item.koText} | ${item.enText} ")
-            }
-    }
 }
