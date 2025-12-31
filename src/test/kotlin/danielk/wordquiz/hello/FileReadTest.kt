@@ -72,14 +72,41 @@ class FileReadTest {
         val koMap = koList.toMap()
         val enMap = enList.toMap()
         val mergedList = allTimeSlots.map { time ->
-            SubtitleItem(
+            SubtitleDouble(
                     startTime = time,
                     koText = koMap[time] ?: "",
                     enText = enMap[time] ?: ""
             )
         }
 
-        printSubtitleItemList(mergedList)
+        // 출력
+        mergedList.take(50).forEachIndexed { idx, item ->
+            println("%5d | %8d | %s | %s".format(idx, item.startTime, item.enText, item.koText))
+        }
+    }
+
+    @Test
+    fun `smi 단일 파일 테스트`() {
+        val filePath = "/Users/user/ws/smi/iron.man.3.2013.02.eng.smi"
+        val content = File(filePath).readText(Charset.forName("UTF-8"))
+
+        // 데이터 정제
+        val list = parseContent(content)
+        val allTimeSlots = (list.map { it.first }).distinct().sorted()
+        val timeMap = list.toMap()
+
+        // 시간 슬롯 기준으로 머지
+        val mergedList = allTimeSlots.map { time ->
+            SubtitleSingle(
+                startTime = time,
+                text = timeMap[time] ?: "",
+            )
+        }
+
+        // 출력
+        mergedList.take(5000).forEachIndexed { idx, item ->
+            println("%5d | %8d | %s".format(idx, item.startTime, item.text))
+        }
     }
 
     private fun parseContent(content: String): List<Pair<Long, String>> {
@@ -102,7 +129,7 @@ class FileReadTest {
             .toList()
     }
 
-    private fun printSubtitleItemList(list: List<SubtitleItem>) {
+    private fun printFormatted(list: List<SubtitleDouble>) {
         list
             .take(300)
             .forEachIndexed { index, item ->

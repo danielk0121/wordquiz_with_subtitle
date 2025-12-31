@@ -1,6 +1,6 @@
 package danielk.wordquiz.hello
 
-data class SubtitleItem(
+data class SubtitleDouble(
     val startTime: Long,
     val koText: String = "",
     val enText: String = ""
