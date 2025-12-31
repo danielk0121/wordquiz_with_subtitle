@@ -87,7 +87,8 @@ class FileReadTest {
 
     @Test
     fun `smi 단일 파일 테스트`() {
-        val filePath = "/Users/user/ws/smi/iron.man.3.2013.02.eng.smi"
+//        val filePath = "/Users/user/ws/smi/iron.man.3.2013.02.eng.smi"
+        val filePath = "/Users/user/ws/smi/iron.man.3.2013.01.kor.smi"
         val content = File(filePath).readText(Charset.forName("UTF-8"))
 
         // 데이터 정제
@@ -104,9 +105,21 @@ class FileReadTest {
         }
 
         // 출력
-        mergedList.take(5000).forEachIndexed { idx, item ->
-            println("%5d | %8d | %s".format(idx, item.startTime, item.text))
-        }
+//        mergedList.take(5000).forEachIndexed { idx, item ->
+//            println("%5d | %8d | %s".format(idx, item.startTime, item.text))
+//        }
+
+        // 파일 출력
+        val outText = mergedList.take(4000).mapIndexed{ idx, item ->
+            val aTime = (item.startTime / 1000) * 1000  // 3자리 버림
+            "%5d | %8d | %8d | %s".format(idx, item.startTime, aTime, item.text)
+        }.joinToString(separator = "\n")
+        writeToFile(outText, "/Users/user/ws/wordquiz_with_subtitle/result/ko.txt")
+    }
+
+    private fun writeToFile(text: String, filePath: String) {
+        val file = File(filePath)
+        file.writeText(text, charset = Charsets.UTF_8)
     }
 
     private fun parseContent(content: String): List<Pair<Long, String>> {
